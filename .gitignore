@@ -37,3 +37,5 @@ nosetests.xml
 .idea
 .Python
 include/
+
+docs/_build/
