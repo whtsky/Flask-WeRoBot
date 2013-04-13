@@ -15,7 +15,7 @@ setup(
     platforms='any',
     install_requires=[
         'Flask',
-        'WeRoBot'
+        'WeRoBot>=0.3.4'
     ],
     classifiers=[
         'Environment :: Web Environment',

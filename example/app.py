@@ -1,12 +1,13 @@
 from flask import Flask, url_for
 from flask.ext.werobot import WeRoBot
 
+WeRoBot_Token = 'tokenhere'
 
 app = Flask(__name__)
-robot = WeRoBot('/wechat')
+robot = WeRoBot()
 
 app.debug = True
-app.config['werobot_token'] = 'tokenhere'
+app.config.from_object(__name__)
 
 
 @robot.handler
