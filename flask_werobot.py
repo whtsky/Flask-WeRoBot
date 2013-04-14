@@ -12,6 +12,7 @@ __version__ = '0.1.0'
 
 try:
     from werobot.robot import BaseRoBot
+    from werobot.utils import check_token
     from flask import Flask
 except ImportError:
     pass
@@ -28,10 +29,10 @@ else:
             assert isinstance(app, Flask)
             self.app = app
             config = app.config
-            config.setdefault('WEROBOT_TOKEN', 'none')
-            config.setdefault('WEROBOT_ROLE', '/wechat')
-            token = config.get('WEROBOT_TOKEN')
-            rule = config.get('WEROBOT_ROLE')
+            token = config.setdefault('WEROBOT_TOKEN', 'none')
+            if not check_token(token):
+                raise AttributeError('%s is not a vailed WeChat Token.' % token)
+            rule = config.setdefault('WEROBOT_ROLE', '/wechat')
 
             from werobot.utils import check_token
             from werobot.parser import parse_user_msg
