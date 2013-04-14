@@ -7,3 +7,9 @@ Flask-WeRoBot
 =========================================
 Flask-WeRoBot 是一个帮助你将 WeRoBot 集成进 Flask 的插件。
 
+API
+----
+
+.. module:: flask.ext.werobot
+
+.. autoclass:: WeRoBot
