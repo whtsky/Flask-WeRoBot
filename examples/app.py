@@ -9,7 +9,7 @@ app.config.from_pyfile('app.cfg')
 
 
 @robot.handler
-def reply():
+def reply(message):
     return 'Hello!'
 
 robot.init_app(app)

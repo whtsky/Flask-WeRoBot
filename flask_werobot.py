@@ -47,6 +47,14 @@ class WeRoBot(BaseRoBot):
             self.app = None
 
     def init_app(self, app):
+        """
+        为一个应用添加 WeRoBot 支持。
+        如果你在实例化 ``WeRoBot`` 类的时候传入了一个 Flask App ，会自动调用本方法；
+        否则你需要手动调用 ``init_app`` 来为应用添加支持。
+        可以通过多次调用 ``init_app`` 并分别传入不同的 Flask App 来复用微信机器人。
+
+        :param app: 一个标准的 Flask App。
+        """
         assert isinstance(app, Flask)
         from werobot.utils import check_token
         from werobot.parser import parse_user_msg
