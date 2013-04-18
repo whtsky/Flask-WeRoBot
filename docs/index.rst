@@ -55,6 +55,10 @@ WEROBOT_TOKEN     微信 Token 值              None
 WEROBOT_ROLE      Flask-WeRoBot 监听的地址   /wechat
 ===============  ========================= =============
 
+.. attention::
+  你可以在实例化 :class:`WeRoBot` 时传入一个 ``token`` ，或者随时通过修改 ``WeRoBot.token`` 的值来改变 token 。
+  Flask-WeRoBot 会优先使用手动指定的 Token ，若没有手动指定才会使用配置文件中的 `` WEROBOT_TOKEN ``
+
 API
 ----
 
@@ -63,6 +67,10 @@ API
 
 ChangeLog
 -----------
+Version v0.1.1
+```````````````
++ 支持手动修改 Token
++ 支持在同一应用中绑定多个微信机器人
 
 Version v0.1.0
 ```````````````

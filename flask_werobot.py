@@ -14,7 +14,7 @@ Links
 * `documentation <https://flask-werobot.readthedocs.org/>`_
 """
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 from werobot.robot import BaseRoBot
 from flask import Flask
@@ -39,14 +39,14 @@ class WeRoBot(BaseRoBot):
             return app
     
     """
-    def __init__(self, app=None):
-        super(WeRoBot, self).__init__()
+    def __init__(self, app=None, endpoint='werobot', rule=None, token=None):
+        super(WeRoBot, self).__init__(token=token)
         if app is not None:
-            self.init_app(app)
+            self.init_app(app, endpoint=endpoint, rule=rule)
         else:
             self.app = None
 
-    def init_app(self, app):
+    def init_app(self, app, endpoint='werobot', rule=None):
         """
         为一个应用添加 WeRoBot 支持。
         如果你在实例化 ``WeRoBot`` 类的时候传入了一个 Flask App ，会自动调用本方法；
@@ -54,6 +54,11 @@ class WeRoBot(BaseRoBot):
         可以通过多次调用 ``init_app`` 并分别传入不同的 Flask App 来复用微信机器人。
 
         :param app: 一个标准的 Flask App。
+        :param endpoint: WeRoBot 的 Endpoint 。默认为 ``werobot`` 。
+            你可以通过 url_for(endpoint) 来获取到 WeRoBot 的地址。
+            如果你想要在同一个应用中绑定多个 WeRoBot 机器人， 请使用不同的 endpoint .
+        :param rule:
+          WeRoBot 机器人的绑定地址。默认为 Flask App Config 中的 ``WEROBOT_ROLE``
         """
         assert isinstance(app, Flask)
         from werobot.utils import check_token
@@ -62,10 +67,13 @@ class WeRoBot(BaseRoBot):
 
         self.app = app
         config = app.config
-        token = config.setdefault('WEROBOT_TOKEN', 'none')
+        token = self.token
+        if token is None:
+            token = config.setdefault('WEROBOT_TOKEN', 'none')
         if not check_token(token):
             raise AttributeError('%s is not a vailed WeChat Token.' % token)
-        rule = config.setdefault('WEROBOT_ROLE', '/wechat')
+        if rule is None:
+            rule = config.setdefault('WEROBOT_ROLE', '/wechat')
 
         if not check_token(token):
             raise AttributeError('%s is not a vaild token.' % token)
@@ -92,5 +100,5 @@ class WeRoBot(BaseRoBot):
             response.headers['content_type'] = 'application/xml'
             return response
 
-        app.add_url_rule(rule, endpoint='werobot',
+        app.add_url_rule(rule, endpoint=endpoint,
                          view_func=handler, methods=['GET', 'POST'])
