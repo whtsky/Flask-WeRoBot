@@ -14,11 +14,10 @@ Links
 * `documentation <https://flask-werobot.readthedocs.org/>`_
 """
 
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 
 from werobot.robot import BaseRoBot
 from flask import Flask
-
 
 class WeRoBot(BaseRoBot):
     """
@@ -39,8 +38,8 @@ class WeRoBot(BaseRoBot):
             return app
     
     """
-    def __init__(self, app=None, endpoint='werobot', rule=None, token=None):
-        super(WeRoBot, self).__init__(token=token)
+    def __init__(self, app=None, endpoint='werobot', rule=None, *args, **kwargs):
+        super(WeRoBot, self).__init__(*args, **kwargs)
         if app is not None:
             self.init_app(app, endpoint=endpoint, rule=rule)
         else:
@@ -93,7 +92,7 @@ class WeRoBot(BaseRoBot):
 
             body = request.data
             message = parse_user_msg(body)
-            reply = self._get_reply(message)
+            reply = self.get_reply(message)
             if not reply:
                 return ''
             response = make_response(create_reply(reply, message=message))

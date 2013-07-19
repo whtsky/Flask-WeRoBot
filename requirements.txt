@@ -1,2 +1,2 @@
 Flask
-WeRoBot>=0.3.5
+WeRoBot>=0.4.0

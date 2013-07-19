@@ -1,15 +1,29 @@
+"""
+Flask-WeRoBot
+---------------
+
+Adds WeRoBot support to Flask.
+
+:copyright: (c) 2013 by whtsky.
+:license: BSD, see LICENSE for more details.
+
+Links
+`````
+
+* `documentation <https://flask-werobot.readthedocs.org/>`_
+"""
+
 from setuptools import setup
-import flask_werobot
 
 setup(
     name='Flask-WeRoBot',
-    version=flask_werobot.__version__,
+    version='0.1.2',
     url='https://github.com/whtsky/Flask-WeRoBot',
     license='BSD',
     author='whtsky',
     author_email='whtsky@gmail.com',
     description='Writing WeChat Robot by WeRoBot in Flask.',
-    long_description=flask_werobot.__doc__,
+    long_description=__doc__,
     py_modules=['flask_werobot'],
     zip_safe=False,
     platforms='any',

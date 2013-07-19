@@ -15,7 +15,7 @@ def reply(message):
 
 robot.init_app(app)
 
-another_robot = WeRoBot()
+another_robot = WeRoBot(token='abcdefg', enable_session=True)
 
 
 @another_robot.handler
@@ -24,7 +24,7 @@ def another_reply(message):
 
 
 another_robot.init_app(app, endpoint='werobot_2',
-                       rule='/wechat/2', token='robot')
+                       rule='/wechat/2')
 
 
 @app.route('/')
