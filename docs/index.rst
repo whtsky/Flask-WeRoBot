@@ -25,7 +25,17 @@ Flask-WeRoBot 是一个帮助你将 WeRoBot 集成进 Flask 的插件。
     def echo(message):
         return 'Hello World'
 
-你可以像使用 `WeRoBot <http://werobot.readthedocs.org/en/latest/>`_ 一样使用 Flask-WeRoBot 。
+你可以像使用 `WeRoBot <http://werobot.readthedocs.org/en/latest/>`_ 一样使用 Flask-WeRoBot ，比如开启 Session ::
+
+    from flask import Flask
+    from flask.ext.werobot import WeRoBot
+
+    app = Flask(__name__)
+    robot = WeRoBot(app， enable_session=True)
+
+    @robot.handler
+    def echo(message, session):
+        return 'Hello World'
 
 当然，你也可以在实例化 :class:`WeRoBot` 时不传入 Flask App ，而是之后通过 :meth:`WeRoBot.init_app` 来给 Flask App 添加 WeRoBot 支持 ::
 
