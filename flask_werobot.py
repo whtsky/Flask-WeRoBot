@@ -86,7 +86,7 @@ class WeRoBot(BaseRoBot):
                     request.args.get('nonce', ''),
                     request.args.get('signature', '')
             ):
-                return 'Invailed request.'
+                return 'Invalid Request.'
             if request.method == 'GET':
                 return request.args['echostr']
 
