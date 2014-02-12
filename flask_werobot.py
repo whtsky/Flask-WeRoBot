@@ -75,7 +75,7 @@ class WeRoBot(BaseRoBot):
             rule = config.setdefault('WEROBOT_ROLE', '/wechat')
 
         if not check_token(token):
-            raise AttributeError('%s is not a vaild token.' % token)
+            raise AttributeError('%s is an invalid token.' % token)
         self.token = token
 
         from flask import request, make_response
@@ -86,7 +86,7 @@ class WeRoBot(BaseRoBot):
                     request.args.get('nonce', ''),
                     request.args.get('signature', '')
             ):
-                return 'Unvailed request.'
+                return 'Invailed request.'
             if request.method == 'GET':
                 return request.args['echostr']
 
