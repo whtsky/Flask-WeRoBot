@@ -74,8 +74,7 @@ class WeRoBot(BaseRoBot):
         if rule is None:
             rule = config.setdefault('WEROBOT_ROLE', '/wechat')
 
-        if not check_token(token):
-            raise AttributeError('%s is an invalid token.' % token)
+
         self.token = token
 
         from flask import request, make_response
